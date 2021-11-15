@@ -10,14 +10,16 @@ class Solution(object):
         left = 0
         right = n
         # calculate middle
-        # as long as left is less than or equal to end, keep looping
+        # as long as left is less than, keep looping
         while left < right:
             middle = (left + right) // 2
+            # check if middle is bad
             if isBadVersion(middle):
+                # if so, move right pointer towards the left
                 right = middle
             else:
+                # if left, move left pointer to the right
                 left = middle + 1
+        # we read from left to right
         return left
-        # if middle is good, then the first bad is on the right
-        # if middle is bad, then the first bad is on the left
         
