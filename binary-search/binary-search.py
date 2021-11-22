@@ -1,6 +1,7 @@
 import math
 
 class Solution(object):
+    # 2 pointer method
     def search(self, nums, target):
         
         def binSearch(nums, l, r):
