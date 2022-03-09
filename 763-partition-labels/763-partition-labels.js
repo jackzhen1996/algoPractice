@@ -24,7 +24,7 @@ var partitionLabels = function(s) {
             // if there is then that is the furthest extent, then check again until there is none greater
     
         // get the chunk into the array
-    
+
     const partitionLengths = []
     let start = 0
     while ( start <= s.length -1 ) { 
@@ -34,7 +34,6 @@ var partitionLabels = function(s) {
                 furthest = mapLetterToFurthestPosition[s[i]] 
             } 
         }
-        
         partitionLengths.push(s.slice(start, furthest+1).length)
         start = furthest + 1
     }
