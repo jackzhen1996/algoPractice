@@ -25,7 +25,7 @@ var findReplaceString = function(s, indices, sources, targets) {
     // O (k), k is length of indices, sources, target
     const mapIndicesToSources = {}
     for (let i = 0; i < indices.length; i++) {
-        mapIndicesToSources[indices[i]] = {source: sources[i], target: targets[i]}
+        mapIndicesToSources[indices[i]] = [sources[i],targets[i]]
     }
     
     const substrings = []
@@ -34,7 +34,7 @@ var findReplaceString = function(s, indices, sources, targets) {
         if (mapIndicesToSources[i]) {
             // check if substring in sources == substring here
             // construct the new substring
-            const {source, target} = mapIndicesToSources[i]
+            const [source, target] = mapIndicesToSources[i]
             const sliceEndIndex = i + source.length
             const slice = s.slice(i, sliceEndIndex)
             if (slice === source) {
