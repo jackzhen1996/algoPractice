@@ -31,7 +31,6 @@ var findReplaceString = function(s, indices, sources, targets) {
     const substrings = []
     // O(n), n = s.length
     for (let i = 0; i < s.length; i++) {
-        console.log(i)
         if (mapIndicesToSources[i]) {
             // check if substring in sources == substring here
             // construct the new substring
@@ -48,7 +47,7 @@ var findReplaceString = function(s, indices, sources, targets) {
             substrings.push(s[i])
         }
     }
-    console.log({substrings, mapIndicesToSources})
+    
     // O(n + k)
     return substrings.join('')
 };
