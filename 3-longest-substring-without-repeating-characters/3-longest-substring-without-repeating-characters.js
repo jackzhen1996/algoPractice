@@ -12,7 +12,8 @@
     // abca is repeating, abc is current longest 
         // move beginning pointer to after the very latest repeating letter is at, move end pointer to same place
 
-
+// abba => ab 
+// a, ab, abb, b
 var lengthOfLongestSubstring = function(s) {
     // iterate s
     // keep track of current longest
@@ -25,20 +26,29 @@ var lengthOfLongestSubstring = function(s) {
     let end = 0
     let uniqueLetters = new Set()
     
-    while (start <= s.length-1 && end <= s.length - 1) {
-        let currentLongest = s.substring(start,end+1)
-        const lastLetter = currentLongest[currentLongest.length-1]
-        if (uniqueLetters.has(lastLetter)) {
-            // move start and end pointer
-            // renew set because we're going to evaluate a different substring
-            uniqueLetters = new Set()
+    while (end <= s.length - 1) {
+        // let currentLongest = s.substring(start,end+1)
+        // const lastLetter = currentLongest[currentLongest.length-1]
+        // if (uniqueLetters.has(lastLetter)) {
+        //     // move start and end pointer
+        //     // renew set because we're going to evaluate a different substring
+        //     uniqueLetters = new Set()
+        //     start ++ 
+        //     end = start 
+        // } else {
+        //     // move end pointer
+        //     uniqueLetters.add(lastLetter)
+        //     longest = Math.max(longest, currentLongest.length)
+        //     end ++
+        // }
+        
+        if (uniqueLetters.has(s[end])) {
+            uniqueLetters.delete(s[start])
             start ++ 
-            end = start 
         } else {
-            // move end pointer
-            uniqueLetters.add(lastLetter)
-            longest = Math.max(longest, currentLongest.length)
+            uniqueLetters.add(s[end])
             end ++
+            longest = Math.max(longest, uniqueLetters.size)
         }
     }
     
