@@ -18,9 +18,11 @@ var characterReplacement = function(s, k) {
     let max = 0
     let maxOcc = 0
     
+    // space: O(26) => O(1)
     const hash = {}
     // letter to counts
     
+    // time: O(n) where n is length of s
     while (j <= s.length -1 ) {
         // take in the letter into hash
         hash[s[j]] ? hash[s[j]] ++ : hash[s[j]] = 1
@@ -28,9 +30,12 @@ var characterReplacement = function(s, k) {
         // if we encounter an invalid window size where replacements > max replacements, we shrink the window, and delete char from ith place
         
         maxOcc = Math.max(hash[s[j]], maxOcc )
+        
+        // time: O(1), because as window length shrinks, the number of replacements should decrease, so replacements should be <= k very quickly, and the window size will never srhink back to size 1 
         while (j - i + 1 - maxOcc > k) {
             hash[s[i]] --
             i ++
+            // time: O(2) => O(1)
             maxOcc = Math.max(hash[s[j]], maxOcc )
         }
         
