@@ -22,13 +22,16 @@ var characterReplacement = function(s, k) {
     // letter to counts
     
     while (j <= s.length -1 ) {
+        // take in the letter into hash
         hash[s[j]] ? hash[s[j]] ++ : hash[s[j]] = 1
         
+        // if we encounter an invalid window size where replacements > max replacements, we shrink the window, and delete char from ith place
         while (j - i + 1 - Math.max(...Object.values(hash)) > k) {
             hash[s[i]] --
             i ++
         }
         
+        // re-evaluate max
         max = Math.max(max, j - i + 1 )
         j ++ 
     }
