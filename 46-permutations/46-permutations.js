@@ -10,6 +10,7 @@ const permute = function(nums) {
         // if reached length of nums
         if (permutation.length === nums.length) {
             answer.push(permutation)
+            return
         }
         
         // recursive case
