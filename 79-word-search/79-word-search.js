@@ -4,22 +4,22 @@
  * @return {boolean}
  */
 
-const findWord = function(i,j,word, board, letterIndex) {
+const findWord = function(i,j,word, board, letterCount) {
     // base case
-    if (word.length === letterIndex) {
+    if (word.length === letterCount) {
         return true
     }
     
     // recursive case
         // does current letter match word[0]
         // check all neighbors for next letter 
-    if (i < board.length && i >= 0 && j < board[i].length && j >= 0 && word[letterIndex] === board[i][j]) {
+    if (i < board.length && i >= 0 && j < board[i].length && j >= 0 && word[letterCount] === board[i][j]) {
         const currentLetter = board[i][j]
         board[i][j] = 0
-        const a = findWord(i-1,j, word, board, letterIndex+1)
-        const b = findWord(i+1,j, word, board, letterIndex+1)
-        const c = findWord(i,j-1, word, board, letterIndex+1)
-        const d = findWord(i,j+1, word, board, letterIndex+1)
+        const a = findWord(i-1,j, word, board, letterCount+1)
+        const b = findWord(i+1,j, word, board, letterCount+1)
+        const c = findWord(i,j-1, word, board, letterCount+1)
+        const d = findWord(i,j+1, word, board, letterCount+1)
         
         if (a || b || c || d) {
             return true
