@@ -45,9 +45,9 @@ var findMin = function(nums) {
         
         // no inflection
         if (nums[0] > nums[middle]) {
-            right = middle
+            right = middle - 1
         } else {
-            left = middle
+            left = middle + 1
         }
     }
     
