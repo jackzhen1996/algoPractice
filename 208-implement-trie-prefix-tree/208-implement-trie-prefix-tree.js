@@ -41,7 +41,7 @@ Trie.prototype.search = function(word) {
     // if word runs out, check if isWord is true
     
     let node = this.root
-    for (let i = 0; i < word.length++; i++) {
+    for (let i = 0; i < word.length; i++) {
         const letterPosition = word.charCodeAt(i)-97
         if (node.children[letterPosition] == null) {
             return false
@@ -63,7 +63,7 @@ Trie.prototype.startsWith = function(word) {
     // if reached end, then return true
     
         let node = this.root
-    for (let i = 0; i < word.length++; i++) {
+    for (let i = 0; i < word.length; i++) {
         const letterPosition = word.charCodeAt(i)-97
         if (node.children[letterPosition] == null) {
             return false
