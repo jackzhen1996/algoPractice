@@ -4,24 +4,29 @@
  * @return {number[]}
  */
 var topKFrequent = function(nums, k) {
-    // keep hashmap of number to count
-    // at the end sort the numbers by occurences and return k elements
+    // collect the count of nums for each number in hashmap
+    // extra hashmap values, sort them
+    // get top k counts from hashmap values
     
-    const numToCount = {}
-    for (const num of nums) {
-        if (numToCount[num]) {
-            numToCount[num] ++
+    // iterate the hashmap again to find the actual numbers
+    
+    const hash = {}
+    for (let i = 0; i < nums.length; i++) {
+        if (hash[nums[i]]) {
+            hash[nums[i]] ++
         } else {
-            numToCount[num] = 1
+            hash[nums[i]] = 1
         }
     }
     
-    const numWithCount = []
-    for (const num in numToCount) {
-        numWithCount.push([num, numToCount[num]])
+    const topKCounts = new Set(Object.values(hash).sort((a,b)=>b-a).slice(0,k))
+    
+    const answer = []
+    for (const num in hash) {
+        if (topKCounts.has(hash[num])) {
+            answer.push(num)
+        }
     }
     
-    const sortedNumWithCount = numWithCount.sort((a,b)=>b[1]-a[1])
-    const numsOnly = sortedNumWithCount.map(numArr=>numArr[0])
-    return numsOnly.slice(0,k)
+    return answer
 };
