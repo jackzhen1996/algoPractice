@@ -3,22 +3,34 @@
  * @return {number}
  */
 var longestConsecutive = function(nums) {
-    // if there is a sequence, sequence[0] should not have left neighbor
-    // so if nums[i] has no left neighbor, we know for sure that this is the start of sequence
-        // use set => retrieve left neighbor, nums[i] - 1
+    // nums[i] is either beginning of seq or not
+        // nums[i-1] does not exist for beginning
+    if (nums.length === 0) {
+        return 0
+    }
     
-    // [100,4,200,1,3,2]
     
-    const set = new Set(nums)
-    let maxLength = 0
-    for (let i = 0; i < nums.length; i++) {
-        if (!set.has(nums[i]-1)) {
-            let currentLength = 0
-            while (set.has(nums[i]+currentLength)) {
-                currentLength ++
-                maxLength = Math.max(currentLength, maxLength)
+    // put nums in set
+    // iterate thru nums
+        // if num is beginning, increment max length
+        // if not beginning, do nothing
+    
+    // [100, 4, 200, 1, 3, 2]
+    
+    // as long as there is a next number, increment the count
+    
+    const numsSet = new Set(nums)
+    let maxLength = 1
+    for (const num of nums) {
+        if (!numsSet.has(num-1)) {
+            let currentLength = 1
+            while (numsSet.has(num+currentLength)) {
+                currentLength ++ 
+                maxLength = Math.max(maxLength, currentLength)
             }
+            
         }
     }
+    
     return maxLength
 };
