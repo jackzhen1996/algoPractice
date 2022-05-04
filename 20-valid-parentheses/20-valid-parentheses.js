@@ -3,42 +3,28 @@
  * @return {boolean}
  */
 var isValid = function(s) {
-    // trivial case
-    // if s length is not even then that means brackets dont match
-    
-    // stack
-    // each time we see an open bracket, we add the bracket to the stack
-        // stack solves ordering part
-    
-    // {{()}}
-    
-    // {} ({})
-    // use hashmap to match closing with opening
-    // {closing: opening}
-    
-    // if opening matches, pop off the stack
-        // if not then it means mismatch
-    
-    if (s.length % 2 !== 0 ) {
-        return false
-    }
-    
-    const hashMap = {
-        '}': '{',
-        ']':'[',
-        ')': '('
-    }
+    // use a stack to keep track of order of parens
+    // if see open, put in stack
+    // if see close, top of stack must match open
+    // if finish iterating s, there's stil stuff in stack, unclosed ones
+        // return false
     const stack = []
+    const closeToOpen = {
+        ')': '(',
+        '}': '{',
+        ']': '['
+    }
     for (let i = 0; i < s.length; i++) {
-        if (hashMap[s[i]]) {
-            if (hashMap[s[i]] !== stack[stack.length-1]) {
+        if (closeToOpen[s[i]]) {
+            const open = stack.pop()
+            if (closeToOpen[s[i]] !== open) {
                 return false
             }
-            stack.pop()
         } else {
             stack.push(s[i])
         }
+        console.log(stack)
     }
     
-    return stack.length == 0
+    return stack.length === 0
 };
