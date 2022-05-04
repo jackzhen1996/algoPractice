@@ -23,7 +23,6 @@ var isValid = function(s) {
         } else {
             stack.push(s[i])
         }
-        console.log(stack)
     }
     
     return stack.length === 0
