@@ -16,7 +16,7 @@ var generateParenthesis = function(n) {
     const output = []
     const dfs = function(parens, open, close) {
         // base case
-        if(close > open || close > n || open > n)  {
+        if(close > open)  {
             return
         }
         
