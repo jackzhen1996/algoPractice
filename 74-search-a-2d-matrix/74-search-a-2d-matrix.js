@@ -74,7 +74,7 @@ var searchMatrix = function(matrix, target) {
     // go down, shift topPointer to mid + 1
     // go up, shift bottomPointer to mid - 1
     // after binarySearch finishes, perform binary search on that row?
-    // time : O(log m) x O ( log (n) ) => O (log m + log n) => O (log n)
+    // time : O (log m + log n) => O (log n)
     
     let top = 0
     let bottom = matrix.length - 1
@@ -82,13 +82,13 @@ var searchMatrix = function(matrix, target) {
     while (top <= bottom) {
         mid = Math.floor((top+bottom)/2)
         const midRow = matrix[mid]
-        if (target <= midRow[midRow.length-1] && target >= midRow[0]) {
-            break
-        }
+
         if (target > midRow[midRow.length-1]) {
             top = mid + 1
         } else if (target < midRow[0]) {
             bottom = mid - 1
+        } else {
+            break
         }
     }
     
