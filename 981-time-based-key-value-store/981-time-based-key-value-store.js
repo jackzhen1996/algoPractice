@@ -36,6 +36,7 @@ TimeMap.prototype.get = function(key, timestamp) {
                 return arr[mid].value
             }
             
+            // very last iteration, find the closes match, it's either the current mid or mid - 1
             if (l === r) {
                 if (arr[mid].timestamp < timestamp) {
                     return arr[mid].value
