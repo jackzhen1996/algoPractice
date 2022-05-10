@@ -11,47 +11,39 @@
  * @return {ListNode}
  */
 var mergeTwoLists = function(list1, list2) {
-    // 0,20,40 list1
-    // 1,30,4 list2
+    // simualtaneously iterate through the two lists
+    // if one node's val is > then other node's val
+        // pick the smaller node, put in the new list
+        // continue the iteration on the list with the smaller node
+    // if same pick both, move both pointer
     
-    // if node1 > node2
-        // set node2 as head and tail
-        // move node 2 pointer
-    // if node 2 > node1
-        // set node1 as tail and connect to merge list, set tail as node 1
-        // move node1 pointer
-    // if same
-        // connect both to merged list, set tail as node 1 or node 2
+    // one of the list iteration will end first, iterate through the rest of nodes
+    // in list that hasn't end, and add rest of the nodes to the new list
     
-    // if either nodes are not null
-    // iterate the rest of that list and add to merged list
     
-    // merged list
-    let node1 = list1
-    let node2 = list2
-    let dummy = new ListNode()
-    let tail = dummy
+    let n1 = list1
+    let n2 = list2
+    let head = new ListNode()
+    let node = head
     
-    while (node1 && node2) {
-        if (node1.val < node2.val) {
-            tail.next = node1
-            node1 = node1.next
+    while (n1 && n2) {
+        if (n1.val > n2.val) {
+            node.next = n2
+            n2 = n2.next
         } else {
-            tail.next = node2
-            node2 = node2.next
+            node.next = n1
+            n1 = n1.next
         }
-        tail = tail.next
-        
+        node = node.next
     }
     
-    if (node1 != null) {
-        tail.next = node1
+    if (n1) {
+        node.next = n1
+    } 
+    
+    else if (n2) {
+        node.next = n2
     }
     
-    if (node2 != null) {
-        tail.next = node2
-    }
-    
-    return dummy.next
-    
+    return head.next
 };
