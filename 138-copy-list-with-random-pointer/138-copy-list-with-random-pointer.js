@@ -30,11 +30,12 @@ var copyRandomList = function(head) {
           return oldToNew.get(oldNode)
       }
       
-      let newNode = new Node(oldNode.val)
+      const {val,next, random} = oldNode
+      let newNode = new Node(val)
       oldToNew.set(oldNode,newNode)
       
-      newNode.next = dfs(oldNode.next)
-      newNode.random = dfs(oldNode.random)
+      newNode.next = dfs(next)
+      newNode.random = dfs(random)
 
       return newNode
   }
