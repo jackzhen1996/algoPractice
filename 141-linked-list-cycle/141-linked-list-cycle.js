@@ -16,17 +16,33 @@ var hasCycle = function(head) {
     // if exist then return true
     // if loop exists, return false
     
-    const set = new WeakSet()
-    let node = head
-    while (node) {
-        if (set.has(node)) {
-            return true
-        } else {
-            set.add(node)
-        }
-        node = node.next
+    // time = O(n + 1) = O(n)
+    // space = O(n)
+//     const set = new WeakSet()
+//     let node = head
+//     while (node) {
+//         if (set.has(node)) {
+//             return true
+//         } else {
+//             set.add(node)
+//         }
+//         node = node.next
+//     }
+    
+//     return false
+    
+    if (head == null) {
+        return false
     }
     
+    let a = head
+    let b = head
+    while (a && b && a.next && b.next) { 
+        a = a.next
+        b = b.next.next
+        if (a === b) {
+            return true
+        }
+    }
     return false
-    
 };
