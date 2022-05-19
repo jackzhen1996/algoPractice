@@ -12,6 +12,9 @@
  * @param {TreeNode} q
  * @return {TreeNode}
  */
+
+// time: O(n/2), n = num of nodes in the tree, => O(n)
+// space: O(1)
 var lowestCommonAncestor = function(root, p, q) {
     // BST means that every left child must be smaller than its parents, and every right child must be bigger than its parents
     
