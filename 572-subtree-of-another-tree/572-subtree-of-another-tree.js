@@ -12,41 +12,38 @@
  * @return {boolean}
  */
 
-const dfs = function(root, subRoot) {
-        if (root == null && subRoot == null) {
-            return true
-        } else if (root == null || subRoot == null) {
-            return false
-        } else if (root.val !== subRoot.val) {
-            return false
-        }
-        
-        return dfs(root.right,subRoot.right) && dfs(root.left, subRoot.left)
+const isSameSubTree = function(a,b) {
+    if (a == null && b == null) {
+        return true
+    } else if (a == null || b == null || a.val !== b.val) {
+        return false
+    } 
+    
+    return isSameSubTree(a.left,b.left) && isSameSubTree(a.right, b.right)
 }
 
 var isSubtree = function(root, subRoot) {
-    // use bfs to look for the same val as root
-    // starting from that subroot, compare with root
-        let found = false
-        const q = [root]
-        let sub = null
-        while (q.length > 0) {
-            const node = q.shift()
-            if (node.val === subRoot.val) {
-                found = dfs(node,subRoot)
-                if (found) {
-                    break
-                }
-            }
-
-            if (node.right != null) {
-                q.push(node.right)
-            }
-
-            if (node.left != null) {
-                q.push(node.left)
+    
+    const node = root
+    const stack = [root]
+    while (stack.length > 0) {
+        const popped = stack.pop()
+        if (popped.val === subRoot.val) {
+            // run dfs
+            const result = isSameSubTree(popped, subRoot)
+            if (result) {
+                return true
             }
         }
-   
-    return found
+        if (popped.right) {
+            stack.push(popped.right)
+        }
+        
+        if (popped.left) {
+            stack.push(popped.left)
+        }
+        
+    }
+    
+    return false
 };
