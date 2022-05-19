@@ -11,40 +11,30 @@
  * @return {number[][]}
  */
 var levelOrder = function(root) {
-
     if (root == null) {
-        return []
+        return []    
     }
     
-    if (root.left == null && root.right == null) {
-        return [[root.val]]
-    }
-    
-    // bfs
-    const answer = []
     const queue = [root]
+    const levels = []
     while (queue.length > 0) {
-        // get the first thing from the queue
+        const qLength = queue.length 
         const level = []
-        let qLength = queue.length
         for (let i = 0; i < qLength; i++) {
-            const node = queue.shift()
-            
-            if (node) {
-                level.push(node.val)
+            const popped = queue.shift()   
+                if (popped) {
+                level.push(popped.val)
 
-                if (node.left) {
-                    queue.push(node.left)
+                if (popped.left) {
+                    queue.push(popped.left)
                 } 
 
-                if (node.right) {
-                    queue.push(node.right)
+                if (popped.right) {
+                    queue.push(popped.right)
                 }
             }
         }
-        answer.push(level)
-        
+        levels.push(level)
     }
-    
-    return answer
+    return levels
 };
