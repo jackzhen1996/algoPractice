@@ -1,12 +1,13 @@
 
-var TrieNode = function(val) {
-    this.val = val
-    this.children = new Array(26)
+
+const Node = function(val) {
+    this.val = val ? val : null
+    this.children = {}
     this.isWord = false
 }
 
 var Trie = function() {
-    this.root = new TrieNode('')
+    this.root = new Node(null)
 };
 
 /** 
@@ -14,19 +15,22 @@ var Trie = function() {
  * @return {void}
  */
 Trie.prototype.insert = function(word) {
-    // go through the children of the current node
-    // if word[0] matches one of the children, go to that child
-    // if not, insert word[0] to the children array
-        let node = this.root
-        for (let i = 0; i < word.length; i++) {
-            const letterPosition = word.charCodeAt(i)-97
-            if (node.children[letterPosition] == null) {
-                node.children[letterPosition] = new TrieNode(word[i])
-            }
-            node = node.children[letterPosition]
+    // check if the letter exist in the current level of the trie
+    // iterate through the word
+    // check if letter exist in the children on current level of trie
+        // if not, add it, then set the next level to the new node
+        // if exist, also set the next level to the node
+    
+    let node = this.root
+    for (let i = 0; i < word.length; i++) {
+        if (!node.children[word[i]]) {
+            node.children[word[i]] = new Node(word[i])
         }
+        node = node.children[word[i]]
+
+    }
+    
     node.isWord = true
-    return this.root
 };
 
 /** 
@@ -34,23 +38,15 @@ Trie.prototype.insert = function(word) {
  * @return {boolean}
  */
 Trie.prototype.search = function(word) {
-    // go thru the childre of the current node
-    // check if each letter of the word matches the current node's value
-        // if match, go to that node
-        // if not then it is false
-    // if word runs out, check if isWord is true
-    
     let node = this.root
     for (let i = 0; i < word.length; i++) {
-        const letterPosition = word.charCodeAt(i)-97
-        if (node.children[letterPosition] == null) {
+        if (!node.children[word[i]]) {
             return false
-        } 
-        node = node.children[letterPosition]
+        }
+        node = node.children[word[i]]
     }
     
     return node.isWord
-    
 };
 
 /** 
@@ -58,21 +54,15 @@ Trie.prototype.search = function(word) {
  * @return {boolean}
  */
 Trie.prototype.startsWith = function(word) {
-    // iterate through the chldren of a node
-    // find the matching letter for the current node
-    // if reached end, then return true
-    
-        let node = this.root
+    let node = this.root
     for (let i = 0; i < word.length; i++) {
-        const letterPosition = word.charCodeAt(i)-97
-        if (node.children[letterPosition] == null) {
+        if (!node.children[word[i]]) {
             return false
-        } 
-        node = node.children[letterPosition]
+        }
+        node = node.children[word[i]]
     }
     
     return true
-    
 };
 
 /** 
