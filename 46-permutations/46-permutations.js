@@ -2,36 +2,28 @@
  * @param {number[]} nums
  * @return {number[][]}
  */
-const permute = function(nums) {
-    const answer = []
-    
-    const tree = function(choices, permutation) {
-        // base case
-        // if reached length of nums
-        if (permutation.length === nums.length) {
-            answer.push(permutation)
-            return
-        }
-        
-        // recursive case
-        // iterate through all possible choices
-            // add the choice in choices to permutation
-            // exclude itself
-            // go down the decision tree
-        
-        for (let i = 0; i < choices.length; i++) {
-            const copyPermutation = [...permutation]
-            const copyChoices = [...choices]
-            if (copyChoices[i] != null) {
-                copyPermutation.push(choices[i])
-                copyChoices[i] = null
-                tree(copyChoices, copyPermutation)
-            }
-        }
-        
-    }
-    
-    tree(nums, [])
-    
-    return answer
+var permute = function(nums) {
+     const result = []
+     const currPermutation = []
+     const currHash = new Set()
+     const dfs = function(i) {
+         
+         if (currPermutation.length === nums.length) {
+             result.push([...currPermutation])
+             return
+         }
+         
+         for (let j = 0; j < nums.length; j ++) {
+             if (!currHash.has(nums[j])) {
+                 currPermutation.push(nums[j])
+                 currHash.add(nums[j])
+                 dfs(j)
+                 const popped = currPermutation.pop()
+                 currHash.delete(popped)
+             }
+         }
+     }
+     
+     dfs(0)
+    return result
 };
