@@ -11,18 +11,36 @@
  * @return {number[]}
  */
 var preorderTraversal = function(root) {
-    const stack = []
+    // const result = []
     // recursive
-    const dfs = function(node) {
-        if (node == null) {
-            return
+//     const dfs = function(node) {
+//         if (node == null) {
+//             return
+//         }
+        
+//         stack.push(node.val)
+//         dfs(node.left)
+//         dfs(node.right)
+//     }
+    
+//     dfs(root)
+    
+    // iterative
+    const stack = [root]
+    const result = []
+    while (stack.length > 0) {
+        const popped = stack.pop()
+        
+        if (popped) {
+            result.push(popped.val)
+            if (popped.right) {
+                stack.push(popped.right)
+            }
+            if (popped.left) {
+                stack.push(popped.left)
+            }
         }
         
-        stack.push(node.val)
-        dfs(node.left)
-        dfs(node.right)
     }
-    
-    dfs(root)
-    return stack
+    return result
 };
