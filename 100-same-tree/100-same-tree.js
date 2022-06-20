@@ -12,11 +12,20 @@
  * @return {boolean}
  */
 var isSameTree = function(p, q) {
+    // if p and q are both missing, this is good
+    // if p or q are missing, this is bad 
+    // if p not equal to q, then this is bad 
+    
     if (p == null && q == null) {
         return true
-    } else if (p == null || q == null || p.val !== q.val) {
+    } 
+    
+    
+    if (p == null || q == null || p.val !== q.val) {
         return false
     }
+
     
-    return isSameTree(p.right, q.right) && isSameTree(p.left,q.left)
+    return isSameTree(q.left, p.left) && isSameTree(q.right, p.right)
+    
 };
