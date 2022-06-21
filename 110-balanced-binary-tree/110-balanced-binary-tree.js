@@ -12,6 +12,8 @@
  */
 
 var isBalanced = function(root) {
+    // get the max depth for each subtree, and find the difference
+    // if diff > 1: set a flag to false
     let found = true
     const dfs = function(root){
         if (root == null) {
@@ -30,5 +32,4 @@ var isBalanced = function(root) {
     }
     dfs(root)
     return found
-    
 };
