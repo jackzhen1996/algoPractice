@@ -11,18 +11,16 @@
  * @return {number}
  */
 var diameterOfBinaryTree = function(root) {
-    // only add them when at top level root
-    // take longest path on left, and take longest path on right, then add them
-    let maxDia = Number.MIN_VALUE
-    const dfs = function(root) {
-        if (root == null) {
+    let maxDia = 0
+    const dfs = function(node) {
+        if (node == null) {
             return 0
         }
         
-        const leftDia = dfs(root.left)
-        const rightDia = dfs(root.right)
-        maxDia = Math.max(leftDia + rightDia, maxDia)
-        return 1 + Math.max(leftDia,rightDia)
+        const left = dfs(node.left)
+        const right = dfs(node.right)
+        maxDia = Math.max(left+right, maxDia)
+        return 1 + Math.max(left,right)
     }
     dfs(root)
     return maxDia
